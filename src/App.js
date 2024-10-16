@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ResponsiveDrawer from "./components/Sidebar";
+import Header from "./components/Header";
+import MovieGridRedux from "./components/MovieGridRedux";
+import SearchResults from "./components/SearchResults";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <div>
+        <Header />
+        <ResponsiveDrawer/>
+        <main
+          style={{ marginLeft: "240px", marginTop: "64px", padding: "20px" }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Routes>
+            <Route path="/" element={<MovieGridRedux category="popular" />} />
+            <Route
+              path="/action"
+              element={<MovieGridRedux category="action" />}
+            />
+            <Route
+              path="/adventure"
+              element={<MovieGridRedux category="adventure" />}
+            />
+            <Route
+              path="/comedy"
+              element={<MovieGridRedux category="comedy" />}
+            />
+            <Route path="/search" element={<SearchResults />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
